@@ -29,7 +29,13 @@ def compress_pdf_ghostscript(input_path, output_path, quality="screen"):
         f"-sOutputFile={output_path}",
         input_path
     ]
-    subprocess.run(command, check=True)
+    try:
+        # Set timeout in seconds (e.g., 90s)
+        subprocess.run(command, check=True, timeout=90)
+    except subprocess.TimeoutExpired:
+        raise RuntimeError("PDF compression timed out. Try a smaller file or lower quality.")
+    except subprocess.CalledProcessError as e:
+        raise RuntimeError(f"Ghostscript failed: {e}")
 @app.route("/")
 def index():
     try:
