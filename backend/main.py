@@ -32,7 +32,10 @@ def compress_pdf_ghostscript(input_path, output_path, quality="screen"):
     subprocess.run(command, check=True)
 @app.route("/")
 def index():
-    return "Hello world"
+    try:
+        return "Server is currently in Running state ✅"
+    except Exception as err:
+        return f"An error occured {err}", 500
 # ✅ API endpoint to compress PDF
 @app.route("/compress", methods=["POST"])
 def compress_pdf():
