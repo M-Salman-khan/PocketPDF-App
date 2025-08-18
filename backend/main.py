@@ -30,7 +30,9 @@ def compress_pdf_ghostscript(input_path, output_path, quality="screen"):
         input_path
     ]
     subprocess.run(command, check=True)
-
+@app.route("/")
+def index():
+    return "Hello world"
 # ✅ API endpoint to compress PDF
 @app.route("/compress", methods=["POST"])
 def compress_pdf():

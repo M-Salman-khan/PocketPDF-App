@@ -51,7 +51,7 @@ class _PDFCompressorAppState extends State<PDFCompressorApp> {
     try {
       var request = http.MultipartRequest(
         'POST',
-        Uri.parse("http://192.168.29.180:10000/compress"), // Replace with your server IP
+        Uri.parse("http://192.168.155.105:10000/compress"), // Replace with your server IP
       );
 
       request.files.add(await http.MultipartFile.fromPath('pdf', _selectedFile!.path));
@@ -106,7 +106,7 @@ class _PDFCompressorAppState extends State<PDFCompressorApp> {
             ),
             const SizedBox(height: 20),
             DropdownButtonFormField<String>(
-              value: _selectedQuality,
+              initialValue: _selectedQuality,
               items: _qualities
                   .map((q) => DropdownMenuItem(
                         value: q,
