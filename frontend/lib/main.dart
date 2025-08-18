@@ -51,7 +51,7 @@ class _PDFCompressorAppState extends State<PDFCompressorApp> {
     try {
       var request = http.MultipartRequest(
         'POST',
-        Uri.parse("http://192.168.155.105:10000/compress"), // Replace with your server IP
+        Uri.parse("https://pdf-compressor-apk.onrender.com/compress"), // Replace with your server IP
       );
 
       request.files.add(await http.MultipartFile.fromPath('pdf', _selectedFile!.path));
