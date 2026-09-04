@@ -1,174 +1,115 @@
-# PDF Compressor - Flutter & Flask Full-Stack Project
+# Pocket PDF - 100% Offline Native Android App (Kotlin & Jetpack Compose)
 
 <p align="center">
-  <img src="https://img.shields.io/badge/Flutter-02569B?style=for-the-badge&logo=flutter&logoColor=white" alt="Flutter Badge"/>
-  <img src="https://img.shields.io/badge/Dart-0175C2?style=for-the-badge&logo=dart&logoColor=white" alt="Dart Badge"/>
-  <img src="https://img.shields.io/badge/Flask-000000?style=for-the-badge&logo=flask&logoColor=white" alt="Flask Badge"/>
-  <img src="https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white" alt="Python Badge"/>
+  <img src="https://img.shields.io/badge/Offline-100%25%20Offline-success?style=for-the-badge" alt="100% Offline Badge"/>
+  <img src="https://img.shields.io/badge/Internet-0%25%20Required-blue?style=for-the-badge" alt="0% Internet Required"/>
+  <img src="https://img.shields.io/badge/Android-3DDC84?style=for-the-badge&logo=android&logoColor=white" alt="Android Badge"/>
+  <img src="https://img.shields.io/badge/Kotlin-7F52FF?style=for-the-badge&logo=kotlin&logoColor=white" alt="Kotlin Badge"/>
+  <img src="https://img.shields.io/badge/Jetpack%20Compose-4285F4?style=for-the-badge&logo=jetpackcompose&logoColor=white" alt="Compose Badge"/>
+  <img src="https://img.shields.io/badge/Material%203-7B1FA2?style=for-the-badge&logo=materialdesign&logoColor=white" alt="Material 3 Badge"/>
   <img src="https://img.shields.io/badge/License-MIT-green.svg?style=for-the-badge" alt="License Badge"/>
 </p>
 
-A complete, cross-platform PDF compression tool featuring a **Flutter** frontend and a **Flask** backend. This project is designed to solve a common problem for students and professionals: reducing large PDF file sizes without relying on slow, ad-filled online services.
-
-The Flutter app provides a clean, native experience on mobile and desktop, while the Flask server handles the heavy lifting of PDF compression using the powerful **Ghostscript** engine.
-
----
-
-## 📸 Demo of Running Application
+> ### 🔒 100% Offline • 0% Internet Needed
+> **Pocket PDF is built strictly for offline privacy.** It requires **0% internet connection** to operate. In fact, the app **does not even declare or request internet permission** (`android.permission.INTERNET`) in its manifest. Your sensitive documents, receipts, and photos never leave your device and are never uploaded to any remote server or cloud service.
 
 <p align="center">
-  <img src=".github/assets/Output.png" alt="App Demo" width="350"/>
-  <br>
-  <em>The main interface of the PDF Compressor app in action.</em>
+  <img src=".github/assets/presentation.jpg" alt="Pocket PDF App Presentation" width="700"/>
 </p>
 
----
-
-## ✨ Why This Project?
-
--   **Student-Focused:** Built to help students meet assignment upload size limits on university portals.
--   **Cross-Platform:** The Flutter app is designed to run seamlessly on Android, iOS, Windows, macOS, and Linux.
--   **Self-Hosted & Private:** The backend can be run locally. Your files never leave your machine, ensuring privacy.
--   **Quality Control:** Offers multiple compression presets to balance file size and visual quality.
+A high-performance, **100% offline** native Android utility built with **Kotlin** and **Jetpack Compose**. It provides two core on-device tools without requiring a single byte of internet data:
+1. **Compress PDF**: Shrinks PDF file sizes completely on-device using hardware-accelerated rendering and multi-tier quality presets.
+2. **Images to PDF**: Combines multiple photos/images into a single PDF document with automatic EXIF orientation correction, thumbnail reordering, and A4 page layout.
 
 ---
 
-## 🚀 Features
+## 🛡️ Why 100% Offline Matters (0% Internet Guarantee)
 
-- 📂 **File Selection:** Pick any PDF file from your device.
-- ⚙️ **Multiple Compression Levels:**
-    -   `screen`: Low resolution, maximum compression.
-    -   `ebook`: Balanced quality for on-screen reading.
-    -   `printer`: High quality, suitable for printing.
-    -   `prepress`: Highest quality for professional use.
-- 📥 **One-Tap Operation:** Compress and download the resulting file with a single button press.
-- 💾 **Save As Dialog:** Choose the name and location for your saved file.
+- 🚫 **Zero Internet Permissions:** The app's `AndroidManifest.xml` does not include `android.permission.INTERNET`. It is physically incapable of transmitting your files, telemetry, or personal data over the web.
+- ✈️ **Works Anytime, Anywhere:** Fully functional in Airplane Mode, in remote areas with zero cell reception, or when mobile data and Wi-Fi are completely disabled.
+- 🔐 **Absolute Document Privacy:** Compress confidential contracts, bank statements, personal photos, or IDs with complete peace of mind—nothing ever leaves your device.
+- ⚡ **Instant Processing & Zero Data Usage:** No upload/download wait times, server queues, bandwidth consumption, or risk of data leaks.
 
 ---
 
-## 📁 Project Structure
+## ✨ Features
 
-The repository is organized into two main parts: the `frontend` (Flutter app) and the `backend` (Flask server).
+### 🗜️ 1. PDF Compressor (100% On-Device)
+- 📱 **100% On-Device & Offline:** Zero network calls; files never leave your device.
+- ⚙️ **4 Compression Presets:**
+  - **Screen (`screen`):** Low resolution, aggressive compression (~72 DPI) for maximum space savings.
+  - **eBook (`ebook`):** Balanced quality (~150 DPI) optimized for digital reading.
+  - **Printer (`printer`):** High quality (~200 DPI) suitable for office printing.
+  - **Prepress (`prepress`):** Highest fidelity (~300 DPI) preserving fine document details.
+- 📊 **Real-Time Progress & Stats:**
+  - Live page-by-page progress bar.
+  - Instant compression comparison (Original Size vs. Compressed Size vs. Space Saved %).
 
-```
-PDF_Compressor/
-├── backend/        # Flask server for PDF compression
-│   ├── main.py
-│   ├── requirements.txt
-│   └── README.md
-├── frontend/       # Flutter app for all platforms
-│   ├── lib/main.dart
-│   ├── pubspec.yaml
-│   └── README.md
-├── .github/assets/ # Contains assets like images for the README
-└── README.md       # You are here!
-```
+### 🖼️ 2. Images to PDF Converter (Fully Offline)
+- 📸 **Multi-Image Selection:** Pick multiple images (JPG, PNG, WEBP) from your local gallery or file manager.
+- 🔄 **Thumbnail Reordering:** Visual preview of all selected images with quick Move Left / Move Right and individual image deletion controls.
+- 🧭 **Auto EXIF Rotation:** Corrects camera photo orientations so portrait photos are never rendered sideways.
+- 📄 **Flexible Page Layout:**
+  - **Standard A4 (595 × 842 pt):** Cleanly fits and centers images onto standard document pages with margins (great for assignments and printing).
+  - **Fit Image Bounds:** Dynamically sizes each page to match the image's exact aspect ratio.
+- 🎚️ **Quality Control:** Choose between Compact (55% JPEG), Balanced (75% JPEG), and High Quality (90% JPEG) to keep the generated PDF size under control.
+
+### 💾 3. Storage & Sharing
+- **Storage Access Framework (SAF):** "Save As" file picker to name and save PDFs locally to any folder (Downloads, Documents, SD card).
+- **Android Share Sheet:** Send compressed or generated PDFs directly via WhatsApp, Gmail, Telegram, Google Drive, etc.
 
 ---
 
 ## 🛠️ Tech Stack
 
-| Layer              | Technology      |
-| ------------------ | --------------- |
-| **Frontend**       | Flutter (Dart)  |
-| **Backend**        | Flask (Python)  |
-| **Compression**    | Ghostscript     |
+| Layer | Technology |
+|---|---|
+| **Internet / Network** | **0% Needed (No `INTERNET` permission in Manifest)** |
+| **Privacy Mode** | **100% Offline & On-Device Processing** |
+| **Language** | Kotlin 2.1.0 |
+| **UI Framework** | Jetpack Compose (BOM 2024.11.00) + Material 3 |
+| **Image Loading** | Coil Compose 2.7.0 |
+| **EXIF Handling** | AndroidX ExifInterface 1.3.7 |
+| **Architecture** | MVVM (Model-View-ViewModel) + StateFlow |
+| **Concurrency** | Kotlin Coroutines (`Dispatchers.IO`) |
+| **PDF Engine** | Native `android.graphics.pdf.PdfRenderer` + `PdfDocument` |
+| **Min / Target SDK** | Android 7.0 (API 24) / Android 15 (API 35) |
 
 ---
 
 ## ⚡ Getting Started
 
-Follow these steps to get the project running on your local machine.
+### Prerequisites
 
-### 1. Backend Setup (Flask Server)
+- **Android Studio Ladybug (2024.2+)** or newer.
+- **JDK 17** or newer configured in Android Studio.
+- Android device or emulator running Android 7.0+ (API 24+).
 
-> 📌 **Full instructions are in the `backend/README.md` file.**
+### Opening & Running the Project
 
-1.  **Prerequisites:** Ensure you have Python 3, pip, and Ghostscript installed and added to your system's PATH.
-2.  **Navigate & Install:**
-    ```bash
-    cd backend
-    pip install -r requirements.txt
-    ```
-3.  **Run the Server:**
-    ```bash
-    python app.py
-    ```
-    The server will start, typically at `http://127.0.0.1:5000`.
+1. Open **Android Studio**.
+2. Select **Open** and choose this directory (`PDF_Compressor_APK-main`).
+3. Allow Gradle to sync dependencies.
+4. Click **Run** (`Shift + F10`) or select your target device.
 
-### 2. Frontend Setup (Flutter App)
+### Building APK via Terminal
 
-> 📱 **Full instructions are in the `frontend/README.md` file.**
+```bash
+# Build Debug APK
+./gradlew assembleDebug
 
-1.  **Prerequisites:** Ensure you have the Flutter SDK installed.
-2.  **Navigate & Install Dependencies:**
-    ```bash
-    cd frontend
-    flutter pub get
-    ```
-3.  **Configure API Endpoint:**
-    Open `frontend/lib/main.dart` and update the `_uploadUrl` to match your running Flask server's address.
-    ```dart
-    // Example for a local server
-    const String _uploadUrl = 'http://127.0.0.1:5000/upload';
-    ```
-4.  **Run the App:**
-    ```bash
-    flutter run
-    ```
-
-## 🛠 Tech Stack
-
-| Layer     | Technology         |
-|-----------|--------------------|
-| Frontend  | Flutter (Dart)     |
-| Backend   | Flask (Python)     |
-| Compression Engine | Ghostscript  |
-
-
----
-
-
-## 📖 How to Use
-
-Once the backend server is running and the Flutter app is launched:
-
-1.  **Select a PDF:** Tap the "Select PDF" button to open your device's file picker.
-2.  **Choose Quality:** Use the dropdown menu to select the desired compression level.
-3.  **Compress:** Tap the "Compress & Download" button.
-4.  **Save File:** A "Save As" dialog will appear, allowing you to name the file and choose where to save it.
-
----
-
-## 📚 In-Depth Documentation
-
-For more specific details on each component, please refer to their individual README files:
-
--   **Backend Details:** `backend/README.md`
--   **Frontend Details:** `frontend/README.md`
-
----
-
-## 🤝 Contributing
-
-Contributions are what make the open-source community such an amazing place to learn, inspire, and create. Any contributions you make are **greatly appreciated**.
-
-Please feel free to fork the repository and submit a pull request. You can also open an issue with the tag "enhancement" to suggest new features.
+# The APK will be generated at:
+# app/build/outputs/apk/debug/app-debug.apk
+```
 
 ---
 
 ## 👨‍💻 Author
 
-Made with 💙 by M-Salman-khan
+Made with 💙 by **M-Salman-khan**
 
 ---
 
 ## 📜 License
 
-This project is distributed under the MIT License. See `LICENSE` for more information.
-
----
-
-## 🌟 Show Your Support
-
-If this project helped you, please give it a ⭐️ on GitHub! This helps others find it and encourages future development.
+This project is distributed under the MIT License. See LICENSE for more information.

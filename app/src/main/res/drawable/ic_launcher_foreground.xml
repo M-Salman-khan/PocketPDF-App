@@ -1,0 +1,53 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="108dp"
+    android:height="108dp"
+    android:viewportWidth="108"
+    android:viewportHeight="108">
+
+    <!-- White Document inside pocket -->
+    <path
+        android:fillColor="#FFFFFF"
+        android:strokeColor="#000000"
+        android:strokeWidth="3"
+        android:pathData="M38,24 L62,24 L70,32 L70,68 L38,68 Z" />
+
+    <!-- Document Fold -->
+    <path
+        android:fillColor="#E2E8F0"
+        android:strokeColor="#000000"
+        android:strokeWidth="2"
+        android:pathData="M62,24 L70,32 L62,32 Z" />
+
+    <!-- "PDF" Text on Document -->
+    <!-- P -->
+    <path
+        android:fillColor="#000000"
+        android:pathData="M44,38 L48.5,38 C49.9,38 51,39.1 51,40.5 C51,41.9 49.9,43 48.5,43 L45.5,43 L45.5,47 L44,47 Z M45.5,39.5 L45.5,41.5 L48.5,41.5 C49,41.5 49.5,41 49.5,40.5 C49.5,40 49,39.5 48.5,39.5 Z" />
+    <!-- D -->
+    <path
+        android:fillColor="#000000"
+        android:pathData="M52.5,38 L56.5,38 C58.4,38 60,39.6 60,42.5 C60,45.4 58.4,47 56.5,47 L52.5,47 Z M54,39.5 L54,45.5 L56.5,45.5 C57.6,45.5 58.5,44.3 58.5,42.5 C58.5,40.7 57.6,39.5 56.5,39.5 Z" />
+    <!-- F -->
+    <path
+        android:fillColor="#000000"
+        android:pathData="M61.5,38 L67,38 L67,39.5 L63,39.5 L63,41.5 L66.5,41.5 L66.5,43 L63,43 L63,47 L61.5,47 Z" />
+
+    <!-- Black Pocket Graphic -->
+    <path
+        android:fillColor="#0F172A"
+        android:strokeColor="#000000"
+        android:strokeWidth="3.5"
+        android:pathData="M30,48 L78,48 L78,72 C78,82 70,88 54,88 C38,88 30,82 30,72 Z" />
+
+    <!-- Pocket Top Rim Curve Detail -->
+    <path
+        android:fillColor="#1E293B"
+        android:pathData="M30,48 L78,48 L78,54 C70,57 38,57 30,54 Z" />
+
+    <!-- Stitching or accent line on pocket -->
+    <path
+        android:strokeColor="#38BDF8"
+        android:strokeWidth="1.5"
+        android:pathData="M34,58 L74,58 L74,70 C74,78 68,83 54,83 C40,83 34,78 34,70 Z" />
+
+</vector>

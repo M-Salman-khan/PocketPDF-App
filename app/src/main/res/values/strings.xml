@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">Pocket PDF</string>
+    <string name="select_pdf">Select PDF</string>
+    <string name="change_pdf">Change File</string>
+    <string name="compress_pdf">Compress PDF</string>
+    <string name="cancel">Cancel</string>
+    <string name="save_pdf">Save to Device</string>
+    <string name="share_pdf">Share PDF</string>
+    <string name="quality_screen">Screen (Maximum Compression)</string>
+    <string name="quality_ebook">eBook (Balanced)</string>
+    <string name="quality_printer">Printer (High Quality)</string>
+    <string name="quality_prepress">Prepress (Max Quality)</string>
+    <string name="tab_compress">Compress PDF</string>
+    <string name="tab_images_to_pdf">Images to PDF</string>
+</resources>
