@@ -14,7 +14,7 @@
 > **Pocket PDF is built strictly for offline privacy.** It requires **0% internet connection** to operate. In fact, the app **does not even declare or request internet permission** (`android.permission.INTERNET`) in its manifest. Your sensitive documents, receipts, and photos never leave your device and are never uploaded to any remote server or cloud service.
 
 <p align="center">
-  <img src=".github/assets/presentation.jpg" alt="Pocket PDF App Presentation" width="700"/>
+  <img src=".github/assets/presentation.jpg" alt="Pocket PDF App Presentation" height="" width="200"/>
 </p>
 
 A high-performance, **100% offline** native Android utility built with **Kotlin** and **Jetpack Compose**. It provides three core on-device tools without requiring a single byte of internet data:
