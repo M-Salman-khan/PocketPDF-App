@@ -91,6 +91,8 @@ class MainActivity : ComponentActivity() {
                     onClearAllImages = imageToPdfViewModel::clearAll,
                     onFitModeSelected = imageToPdfViewModel::setFitMode,
                     onImageQualitySelected = imageToPdfViewModel::setQuality,
+                    onCompressInOneGoChanged = imageToPdfViewModel::setCompressInOneGo,
+                    onImageCompressionQualitySelected = imageToPdfViewModel::setCompressionQuality,
                     onConvertImagesClicked = { imageToPdfViewModel.convertImagesToPdf(this) },
                     onCancelConvertImagesClicked = imageToPdfViewModel::cancelConversion,
                     onOpenImagesPdfClicked = {

@@ -15,6 +15,7 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Bolt
 import androidx.compose.material.icons.filled.Collections
 import androidx.compose.material.icons.filled.Compress
 import androidx.compose.material.icons.filled.History
@@ -66,6 +67,7 @@ import kotlinx.coroutines.launch
 enum class AppScreen(val title: String, val subtitle: String, val icon: ImageVector) {
     COMPRESS("Compress PDF", "Reduce PDF file size", Icons.Default.Compress),
     IMAGES_TO_PDF("Images to PDF", "Merge photos into single PDF", Icons.Default.Collections),
+    CREATE_AND_COMPRESS("Scan & Compress", "Images to compressed PDF in one go", Icons.Default.Bolt),
     HISTORY("History", "Recent documents & viewer", Icons.Default.History)
 }
 
@@ -92,6 +94,8 @@ fun MainAppScreen(
     onClearAllImages: () -> Unit,
     onFitModeSelected: (PageFitMode) -> Unit,
     onImageQualitySelected: (ImageQualityPreset) -> Unit,
+    onCompressInOneGoChanged: (Boolean) -> Unit,
+    onImageCompressionQualitySelected: (CompressionQuality) -> Unit,
     onConvertImagesClicked: () -> Unit,
     onCancelConvertImagesClicked: () -> Unit,
     onOpenImagesPdfClicked: () -> Unit,
@@ -224,6 +228,11 @@ fun MainAppScreen(
                         selected = isSelected,
                         onClick = {
                             currentScreen = screen
+                            if (screen == AppScreen.CREATE_AND_COMPRESS) {
+                                onCompressInOneGoChanged(true)
+                            } else if (screen == AppScreen.IMAGES_TO_PDF) {
+                                onCompressInOneGoChanged(false)
+                            }
                             scope.launch { drawerState.close() }
                         },
                         modifier = Modifier.padding(NavigationDrawerItemDefaults.ItemPadding)
@@ -274,9 +283,19 @@ fun MainAppScreen(
                                 text = { Text("Images to PDF") },
                                 onClick = {
                                     currentScreen = AppScreen.IMAGES_TO_PDF
+                                    onCompressInOneGoChanged(false)
                                     showMenuOverflow = false
                                 },
                                 leadingIcon = { Icon(Icons.Default.Collections, contentDescription = null) }
+                            )
+                            DropdownMenuItem(
+                                text = { Text("Scan & Compress") },
+                                onClick = {
+                                    currentScreen = AppScreen.CREATE_AND_COMPRESS
+                                    onCompressInOneGoChanged(true)
+                                    showMenuOverflow = false
+                                },
+                                leadingIcon = { Icon(Icons.Default.Bolt, contentDescription = null) }
                             )
                             DropdownMenuItem(
                                 text = { Text("View History") },
@@ -320,10 +339,12 @@ fun MainAppScreen(
                         onShareClicked = onShareCompressedClicked,
                         modifier = Modifier.fillMaxSize()
                     )
-                    AppScreen.IMAGES_TO_PDF -> ImageToPdfScreen(
+                    AppScreen.IMAGES_TO_PDF, AppScreen.CREATE_AND_COMPRESS -> ImageToPdfScreen(
                         images = imageToPdfState.images,
                         fitMode = imageToPdfState.fitMode,
                         quality = imageToPdfState.quality,
+                        compressInOneGo = imageToPdfState.compressInOneGo,
+                        compressionQuality = imageToPdfState.compressionQuality,
                         isResolving = imageToPdfState.isResolving,
                         isProcessing = imageToPdfState.isProcessing,
                         progress = imageToPdfState.progress,
@@ -336,6 +357,8 @@ fun MainAppScreen(
                         onClearAll = onClearAllImages,
                         onFitModeSelected = onFitModeSelected,
                         onQualitySelected = onImageQualitySelected,
+                        onCompressInOneGoChanged = onCompressInOneGoChanged,
+                        onCompressionQualitySelected = onImageCompressionQualitySelected,
                         onConvertClicked = onConvertImagesClicked,
                         onCancelClicked = onCancelConvertImagesClicked,
                         onOpenClicked = onOpenImagesPdfClicked,

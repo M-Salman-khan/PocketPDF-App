@@ -9,6 +9,7 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
 import com.pocketpdf.data.HistoryRepository
 import com.pocketpdf.engine.ImageToPdfEngine
+import com.pocketpdf.model.CompressionQuality
 import com.pocketpdf.model.HistoryItem
 import com.pocketpdf.model.HistoryType
 import com.pocketpdf.model.ImageItem
@@ -27,6 +28,8 @@ data class ImageToPdfUiState(
     val images: List<ImageItem> = emptyList(),
     val fitMode: PageFitMode = PageFitMode.FIT_A4,
     val quality: ImageQualityPreset = ImageQualityPreset.BALANCED,
+    val compressInOneGo: Boolean = true,
+    val compressionQuality: CompressionQuality = CompressionQuality.EBOOK,
     val isResolving: Boolean = false,
     val isProcessing: Boolean = false,
     val progress: Float = 0f,
@@ -98,12 +101,22 @@ class ImageToPdfViewModel(application: Application) : AndroidViewModel(applicati
         _uiState.update { it.copy(quality = quality, result = null) }
     }
 
+    fun setCompressInOneGo(enabled: Boolean) {
+        _uiState.update { it.copy(compressInOneGo = enabled, result = null) }
+    }
+
+    fun setCompressionQuality(quality: CompressionQuality) {
+        _uiState.update { it.copy(compressionQuality = quality, result = null) }
+    }
+
     fun convertImagesToPdf(context: Context) {
         val currentImages = _uiState.value.images
         if (currentImages.isEmpty()) return
 
         val fitMode = _uiState.value.fitMode
         val quality = _uiState.value.quality
+        val compressInOneGo = _uiState.value.compressInOneGo
+        val compressionQuality = _uiState.value.compressionQuality
 
         conversionJob?.cancel()
         conversionJob = viewModelScope.launch {
@@ -123,6 +136,8 @@ class ImageToPdfViewModel(application: Application) : AndroidViewModel(applicati
                 images = currentImages,
                 fitMode = fitMode,
                 quality = quality,
+                compressInOneGo = compressInOneGo,
+                compressionQuality = compressionQuality,
                 onProgress = { current, total ->
                     _uiState.update {
                         it.copy(
@@ -144,12 +159,18 @@ class ImageToPdfViewModel(application: Application) : AndroidViewModel(applicati
                 }
 
                 // Save to history automatically
+                val historyType = if (res.isCompressed) {
+                    HistoryType.IMAGES_TO_COMPRESSED_PDF
+                } else {
+                    HistoryType.IMAGES_TO_PDF
+                }
+
                 historyRepository.addItem(
                     HistoryItem(
                         title = res.outputFileName,
                         filePath = res.outputFile.absolutePath,
-                        type = HistoryType.IMAGES_TO_PDF,
-                        originalSizeBytes = 0L,
+                        type = historyType,
+                        originalSizeBytes = if (res.isCompressed) res.originalImagesSizeBytes else 0L,
                         resultSizeBytes = res.fileSizeBytes,
                         pageCount = res.pageCount
                     )

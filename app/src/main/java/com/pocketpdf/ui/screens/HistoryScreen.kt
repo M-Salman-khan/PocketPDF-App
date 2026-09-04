@@ -16,6 +16,7 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Bolt
 import androidx.compose.material.icons.filled.Collections
 import androidx.compose.material.icons.filled.Compress
 import androidx.compose.material.icons.filled.Delete
@@ -146,7 +147,11 @@ private fun HistoryItemCard(
                     modifier = Modifier.size(40.dp)
                 ) {
                     Icon(
-                        imageVector = if (item.type == HistoryType.COMPRESSED_PDF) Icons.Default.Compress else Icons.Default.Collections,
+                        imageVector = when (item.type) {
+                            HistoryType.COMPRESSED_PDF -> Icons.Default.Compress
+                            HistoryType.IMAGES_TO_COMPRESSED_PDF -> Icons.Default.Bolt
+                            HistoryType.IMAGES_TO_PDF -> Icons.Default.Collections
+                        },
                         contentDescription = null,
                         modifier = Modifier
                             .padding(8.dp)
@@ -194,7 +199,7 @@ private fun HistoryItemCard(
                 horizontalArrangement = Arrangement.SpaceBetween,
                 verticalAlignment = Alignment.CenterVertically
             ) {
-                if (item.type == HistoryType.COMPRESSED_PDF && item.originalSizeBytes > 0) {
+                if ((item.type == HistoryType.COMPRESSED_PDF || item.type == HistoryType.IMAGES_TO_COMPRESSED_PDF) && item.originalSizeBytes > 0) {
                     Row(horizontalArrangement = Arrangement.spacedBy(6.dp)) {
                         Text(
                             text = "${item.formattedOriginalSize} → ${item.formattedResultSize}",
@@ -203,7 +208,7 @@ private fun HistoryItemCard(
                         )
                         if (item.savingsPercentage > 0) {
                             Text(
-                                text = "(-${String.format("%.0f", item.savingsPercentage)}%)",
+                                text = "(-${String.format(java.util.Locale.US, "%.0f", item.savingsPercentage)}%)",
                                 style = MaterialTheme.typography.bodyMedium,
                                 fontWeight = FontWeight.Bold,
                                 color = SuccessGreen

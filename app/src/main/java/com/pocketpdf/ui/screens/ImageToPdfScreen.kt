@@ -13,6 +13,7 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Bolt
 import androidx.compose.material.icons.filled.PictureAsPdf
 import androidx.compose.material3.Button
 import androidx.compose.material3.CircularProgressIndicator
@@ -22,7 +23,9 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import com.pocketpdf.model.CompressionQuality
 import com.pocketpdf.model.ImageItem
 import com.pocketpdf.model.ImageQualityPreset
 import com.pocketpdf.model.ImageToPdfResult
@@ -37,6 +40,8 @@ fun ImageToPdfScreen(
     images: List<ImageItem>,
     fitMode: PageFitMode,
     quality: ImageQualityPreset,
+    compressInOneGo: Boolean,
+    compressionQuality: CompressionQuality,
     isResolving: Boolean,
     isProcessing: Boolean,
     progress: Float,
@@ -49,6 +54,8 @@ fun ImageToPdfScreen(
     onClearAll: () -> Unit,
     onFitModeSelected: (PageFitMode) -> Unit,
     onQualitySelected: (ImageQualityPreset) -> Unit,
+    onCompressInOneGoChanged: (Boolean) -> Unit,
+    onCompressionQualitySelected: (CompressionQuality) -> Unit,
     onConvertClicked: () -> Unit,
     onCancelClicked: () -> Unit,
     onOpenClicked: () -> Unit,
@@ -89,9 +96,13 @@ fun ImageToPdfScreen(
             ImageToPdfOptionsCard(
                 fitMode = fitMode,
                 quality = quality,
+                compressInOneGo = compressInOneGo,
+                compressionQuality = compressionQuality,
                 enabled = !isProcessing,
                 onFitModeSelected = onFitModeSelected,
-                onQualitySelected = onQualitySelected
+                onQualitySelected = onQualitySelected,
+                onCompressInOneGoChanged = onCompressInOneGoChanged,
+                onCompressionQualitySelected = onCompressionQualitySelected
             )
 
             // Convert button
@@ -103,11 +114,19 @@ fun ImageToPdfScreen(
                         .height(52.dp),
                     shape = RoundedCornerShape(12.dp)
                 ) {
-                    Icon(Icons.Default.PictureAsPdf, contentDescription = null)
+                    Icon(
+                        imageVector = if (compressInOneGo) Icons.Default.Bolt else Icons.Default.PictureAsPdf,
+                        contentDescription = null
+                    )
                     Spacer(modifier = Modifier.width(8.dp))
                     Text(
-                        text = "Create PDF (${images.size} ${if (images.size == 1) "Page" else "Pages"})",
-                        style = MaterialTheme.typography.titleMedium
+                        text = if (compressInOneGo) {
+                            "⚡ Create & Compress (${images.size} ${if (images.size == 1) "Page" else "Pages"})"
+                        } else {
+                            "Create PDF (${images.size} ${if (images.size == 1) "Page" else "Pages"})"
+                        },
+                        style = MaterialTheme.typography.titleMedium,
+                        fontWeight = FontWeight.Bold
                     )
                 }
             }

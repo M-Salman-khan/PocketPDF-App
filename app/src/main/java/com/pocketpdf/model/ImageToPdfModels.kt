@@ -52,9 +52,28 @@ data class ImageToPdfResult(
     val outputFile: File,
     val outputFileName: String,
     val fileSizeBytes: Long,
+    val originalImagesSizeBytes: Long = 0L,
+    val isCompressed: Boolean = false,
+    val compressionQuality: CompressionQuality? = null,
     val pageCount: Int,
     val durationMs: Long
 ) {
     val formattedSize: String
         get() = formatBytes(fileSizeBytes)
+
+    val formattedOriginalSize: String
+        get() = formatBytes(originalImagesSizeBytes)
+
+    val savedBytes: Long
+        get() = (originalImagesSizeBytes - fileSizeBytes).coerceAtLeast(0L)
+
+    val formattedSavedBytes: String
+        get() = formatBytes(savedBytes)
+
+    val savingsPercentage: Float
+        get() = if (originalImagesSizeBytes > 0 && fileSizeBytes < originalImagesSizeBytes) {
+            ((originalImagesSizeBytes - fileSizeBytes).toFloat() / originalImagesSizeBytes.toFloat() * 100f).coerceIn(0f, 99.9f)
+        } else {
+            0f
+        }
 }

@@ -17,9 +17,10 @@
   <img src=".github/assets/presentation.jpg" alt="Pocket PDF App Presentation" width="700"/>
 </p>
 
-A high-performance, **100% offline** native Android utility built with **Kotlin** and **Jetpack Compose**. It provides two core on-device tools without requiring a single byte of internet data:
+A high-performance, **100% offline** native Android utility built with **Kotlin** and **Jetpack Compose**. It provides three core on-device tools without requiring a single byte of internet data:
 1. **Compress PDF**: Shrinks PDF file sizes completely on-device using hardware-accelerated rendering and multi-tier quality presets.
 2. **Images to PDF**: Combines multiple photos/images into a single PDF document with automatic EXIF orientation correction, thumbnail reordering, and A4 page layout.
+3. **⚡ Create & Compress in One Go**: Converts photos into a PDF and optimizes it directly in a single pass—reducing 20–50 MB of raw phone photos into a compact 1–2 MB document instantly.
 
 ---
 
@@ -54,7 +55,13 @@ A high-performance, **100% offline** native Android utility built with **Kotlin*
   - **Fit Image Bounds:** Dynamically sizes each page to match the image's exact aspect ratio.
 - 🎚️ **Quality Control:** Choose between Compact (55% JPEG), Balanced (75% JPEG), and High Quality (90% JPEG) to keep the generated PDF size under control.
 
-### 💾 3. Storage & Sharing
+### ⚡ 3. Create & Compress in One Go (Images ➔ Compressed PDF)
+- 🚀 **1-Step Workflow:** No need to generate a giant PDF first and manually compress it later; the app scales, compresses, and generates your optimized PDF in a single streamlined pipeline.
+- 📉 **Massive Space Reduction (80%–98% Savings):** Shrinks heavy camera photos (4–10 MB each) into a lightweight, email-ready PDF with crystal-clear readability.
+- 🎛️ **Direct Compression Quality Controls:** Choose between Screen (~72 DPI, ultra-compact), eBook (~150 DPI, balanced), Printer (~200 DPI), or Prepress.
+- 📊 **Instant Comparison Stats:** View original total image size vs. final compressed PDF size and exact savings percentage immediately.
+
+### 💾 4. Storage & Sharing
 - **Storage Access Framework (SAF):** "Save As" file picker to name and save PDFs locally to any folder (Downloads, Documents, SD card).
 - **Android Share Sheet:** Send compressed or generated PDFs directly via WhatsApp, Gmail, Telegram, Google Drive, etc.
 

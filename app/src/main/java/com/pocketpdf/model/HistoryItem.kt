@@ -8,7 +8,8 @@ import java.util.UUID
 
 enum class HistoryType(val label: String) {
     COMPRESSED_PDF("Compressed PDF"),
-    IMAGES_TO_PDF("Created from Images")
+    IMAGES_TO_PDF("Created from Images"),
+    IMAGES_TO_COMPRESSED_PDF("Created & Compressed")
 }
 
 data class HistoryItem(
